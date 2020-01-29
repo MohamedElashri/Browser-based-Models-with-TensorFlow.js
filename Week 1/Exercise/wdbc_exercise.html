@@ -17,24 +17,7 @@
                       return{ xs: Object.values(xs), ys: Object.values(ys)};
                   }).batch(10);
                   
-            // const testingUrl = 'wdbc-test.csv';
-            
-            // const testingData = tf.data.csv(testingUrl, {
-            //     columnConfigs: {
-            //         diagnosis: {
-            //             isLabel: true
-            //         }
-            //     }
-                
-            // });
-
-            // const convertedTestingData = 
-            //     testingData.map(({xs, ys}) => {
-            //           return{ xs: Object.values(xs), ys: Object.values(ys)};
-            //       }).batch(10);
-            
             const numOfFeatures = 30;
-            // console.log(numOfFeatures);
             
             const model = tf.sequential();
             model.add(tf.layers.dense({inputShape: [numOfFeatures], activation: "relu", units: 20}))
@@ -47,7 +30,6 @@
 
             model.summary();
 
-            //console.log(convertedTrainingData);
 
             await model.fitDataset(convertedTrainingData, 
                              {epochs:100,
@@ -57,15 +39,7 @@
                                   }
                               }});
             
-            // await model.fitDataset(convertedTrainingData, 
-            //                  {epochs:100,
-            //                   validationData: convertedTestingData,
-            //                   callbacks:{
-            //                       onEpochEnd: async(epoch, logs) =>{
-            //                           console.log("Epoch: " + epoch + " Loss: " + logs.loss + " Accuracy: " + logs.acc);
-            //                       }
-            //                   }});
-            // await model.save('downloads://my_model');
+            await model.save('downloads://my_model');
             
             
         }
